@@ -5,7 +5,6 @@ import folium.features as folf
 from streamlit_gsheets import GSheetsConnection
 import pyogrio as pyo
 import requests
-import io as io
 import html
 
 ## Configurações da Página ##
