@@ -7,6 +7,7 @@ import pyogrio as pyo
 import requests
 from streamlit_folium import st_folium
 import branca
+import html
 
 ## Configurações da Página ##
 st.set_page_config(layout="wide")
@@ -46,15 +47,16 @@ def colorir_regional(feature):
     regional_id = feature["properties"].get("id", None)
     cor = cores.get(regional_id, "#fddaec")
     return {
-        "fillOpacity": 0.4,
+        "fillOpacity": 0.65,
         "fillColor": cor,
-        "color": cor,
+        "color": "black",
         "weight": 2,
         "dashArray": "5,5"
     }
 
 ## Criar Mapa ##
-contagem_base = fol.Map(location=[-44.05183333, -19.93845833], zoom_start=4, tiles="OpenStreetMap", max_zoom=8, src = 4326)
+contagem_base = fol.Map(location=[-19.88589, -44.07113], zoom_start=12.18, tiles="OpenStreetMap",
+                         max_zoom=20, src = 4326)
 
 ## Remover pontos com coordenadas vazias
 
@@ -70,9 +72,9 @@ for _, row in gdf_ups.iterrows():
     coord = (row["lat"], row["lon"])
     numeral = row["Numeral"]
     type_color = {
-        "1": "green",
-        "2": "blue",
-        "3": "orange"
+        1: "green",
+        2: "blue",
+        3: "orange"
     }.get(numeral, "purple")
 
     fol.Marker(
@@ -90,4 +92,4 @@ for _, row in gdf_ups.iterrows():
 ## Exibir no Streamlit ##
 st.title(APP_TITLE)
 st.header(APP_SUB_TITLE)
-st_map = st_folium(contagem_base, width=750, height=450)
+st_map = st_folium(contagem_base, width=750, height=750)
