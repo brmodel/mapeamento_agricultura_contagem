@@ -62,7 +62,7 @@ contagem_base = fol.Map(location=[-44.05183333, -19.93845833], zoom_start=4, til
 fol.GeoJson(
     regionais_json,
     style_function=colorir_regional,
-    tooltip=fol.GeoJsonTooltip(fields=["Nome"], aliases=["Regional:"])
+    tooltip=fol.GeoJsonTooltip(fields=["Name"], aliases=["Regional:"])
 ).add_to(contagem_base)
 
 # Adicionar Pontos
