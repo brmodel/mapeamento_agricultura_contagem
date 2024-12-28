@@ -38,7 +38,8 @@ def colorir_regional(feature):
         6: "#ffffcc",
         7: "#e5d8bd"
     }
-    regional_id = feature["properties"]["id"]
+    ##regional_id = feature["properties"]["id"]
+    regional_id = feature["properties"].get("id", None)
     cor = cores.get(regional_id, "#fddaec")
     return {
         "fillOpacity": 0.4,
