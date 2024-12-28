@@ -87,4 +87,4 @@ for _, row in gdf_ups.iterrows():
 ## Exibir no Streamlit ##
 st.title(APP_TITLE)
 st.header(APP_SUB_TITLE)
-st_map = st_folium(contagem_base, width=750, height=450)
+st_map = st.folium(contagem_base, width=750, height=450)
