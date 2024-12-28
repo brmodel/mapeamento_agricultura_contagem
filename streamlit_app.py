@@ -52,7 +52,7 @@ def colorir_regional(feature):
     }
 
 ## Criar Mapa ##
-contagem_base = fol.Map([-44.05183333, -19.93845833], zoom_start=4, tiles="OpenStreetMap", max_zoom=8, src = 4326)
+contagem_base = fol.Map(location=[-44.05183333, -19.93845833], zoom_start=4, tiles="OpenStreetMap", max_zoom=8, src = 4326)
 
 ## Remover pontos com coordenadas vazias
 
