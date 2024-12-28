@@ -3,7 +3,5 @@ pandas
 geopandas
 folium
 git+https://github.com/streamlit/gsheets-connection
-pyogrio
 requests
-io
 html
