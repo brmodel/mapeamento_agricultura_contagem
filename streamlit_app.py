@@ -5,6 +5,8 @@ import folium.features as folf
 from streamlit_gsheets import GSheetsConnection
 import pyogrio as pyo
 import requests
+import streamlit-folium
+from streamlit_folium import st_folium
 
 ## Configurações da Página ##
 st.set_page_config(layout="wide")
@@ -87,4 +89,4 @@ for _, row in gdf_ups.iterrows():
 ## Exibir no Streamlit ##
 st.title(APP_TITLE)
 st.header(APP_SUB_TITLE)
-st_map = st.folium(contagem_base, width=750, height=450)
+st_map = st_folium(contagem_base, width=750, height=450)
