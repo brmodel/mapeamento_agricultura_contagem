@@ -5,3 +5,4 @@ folium
 git+https://github.com/streamlit/gsheets-connection
 requests
 streamlit_folium
+branca
