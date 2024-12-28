@@ -66,12 +66,12 @@ fol.GeoJson(
 # Adicionar Pontos
 for _, row in gdf_ups.iterrows():
     coord = (row["lat"], row["lon"])
-    tipo = row["Numeral"]
+    numeral = row["Numeral"]
     type_color = {
         "1": "green",
         "2": "blue",
         "3": "orange"
-    }.get(tipo, "purple")
+    }.get(numeral, "purple")
 
     fol.Marker(
         location=coord,
