@@ -18,6 +18,7 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 url = "https://docs.google.com/spreadsheets/d/16t5iUxuwnNq60yG7YoFnJw3RWnko9-YkkAIFGf6xbTM/edit?gid=1832051074#gid=1832051074"
 data_ups_sujo = conn.read(spreadsheet=url, worksheet="1832051074")
 data_ups = data_ups_sujo.dropna(subset=['Nome','lon','lat','Tipo','Regional','Numeral'])
+print(data_ups_sujo.columns)
 
 ## Carregar GeoJSON ##
 geojson_url = "https://raw.githubusercontent.com/brmodel/mapeamento_agricultura_contagem/main/regionais_contagem.geojson"
