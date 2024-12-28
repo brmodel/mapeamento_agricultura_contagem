@@ -6,6 +6,7 @@ from streamlit_gsheets import GSheetsConnection
 import pyogrio as pyo
 import requests
 from streamlit_folium import st_folium
+import branca
 
 ## Configurações da Página ##
 st.set_page_config(layout="wide")
