@@ -4,4 +4,4 @@ geopandas
 folium
 git+https://github.com/streamlit/gsheets-connection
 requests
-streamlit-folium
+streamlit_folium
