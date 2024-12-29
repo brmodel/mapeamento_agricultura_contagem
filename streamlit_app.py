@@ -54,15 +54,13 @@ def colorir_regional(feature):
         "dashArray": "5,5"
     }
 
-leaf_icon = """<i class="fa-duotone fa-regular fa-leaf" style="--fa-primary-color: #385b15; --fa-secondary-color: #59ab59;"></i>"""
-
 ## Criar Mapa ##
 contagem_base = fol.Map(location=[-19.88589, -44.07113], zoom_start=12.18, tiles="OpenStreetMap",
                          max_zoom=20, src = 4326)
-pane_community = folium.FeatureGroup(name="Unidade Produtiva Comunitária")
-pane_institution = folium.FeatureGroup(name="Unidade Produtiva Institucional")
-pane_institution_community = folium.FeatureGroup(name="Unidade Produtiva Institucional/Comunitária")
-pane_fair = folium.FeatureGroup(name="Feira Comunitária")
+up_comu = fol.FeatureGroup(name="Unidade Produtiva Comunitária")
+up_inst = fol.FeatureGroup(name="Unidade Produtiva Institucional")
+up_hibrida = fol.FeatureGroup(name="Unidade Produtiva Institucional/Comunitária")
+feira_comu = fol.FeatureGroup(name="Feira Comunitária")
 
 # Adicionar o GeoJSON
 fol.GeoJson(
@@ -87,7 +85,7 @@ for _, row in gdf_ups.iterrows():
                      <h7><b>Regional:</b></h7> {row['Regional']}"""
     
     # Criar o marcador
-    marker = folium.Marker(
+    marker = fol.Marker(
         location=coord,
         popup=fol.Popup(
             html=popup_html,
@@ -100,13 +98,13 @@ for _, row in gdf_ups.iterrows():
     
     # Adicionar o marcador ao grupo correto dependendo do 'Numeral'
     if numeral == 1:
-        marker.add_to(pane_community)
+        marker.add_to(up_comu)
     elif numeral == 2:
-        marker.add_to(pane_institution)
+        marker.add_to(up_inst)
     elif numeral == 3:
-        marker.add_to(pane_institution_community)
+        marker.add_to(up_hibrida)
     else:
-        marker.add_to(pane_fair)
+        marker.add_to(feira_comu)
 
 # Adicionar o LayerControl para controle das camadas
 fol.LayerControl().add_to(contagem_base)
