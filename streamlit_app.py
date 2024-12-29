@@ -76,18 +76,26 @@ for _, row in gdf_ups.iterrows():
         2: "blue",
         3: "orange"
     }.get(numeral, "purple")
-    popup_html = f"""<h6><b>{row['Nome']}</h6></b><br>
-        <h7><b>Tipo:</h7></b> {row['Tipo']}<br>
-        <h7><b>Regional:</h7></b> {row['Regional']}"""
+    pane_name = {
+        1: "Unidade Produtiva Comunitária",
+        2: "Unidade Produtiva Institucional",
+        3: "Unidade Produtiva Institucional/Comunitária"
+    }.get(numeral, "Feira Comunitária")
+    popup_html = f"""<h6><b>{row['Nome']}</b></h6><br>
+        <h7><b>Tipo:</b></h7> {row['Tipo']}<br>
+        <h7><b>Regional:</b></h7> {row['Regional']}"""
     fol.Marker(
         location=coord,
         popup=fol.Popup(
         html= popup_html,
-        parse_html=False
+        parse_html=False,
+        lazy=True
         ),
         icon=fol.Icon(color=type_color),
-        tooltip=f"Conheça a Unidade Produtiva: {row['Nome']}"
-    ).add_to(contagem_base)
+        tooltip=f"Conheça a Unidade Produtiva: {row['Nome']}",
+        pane=pane_name
+        ).add_to(contagem_base)
+
 
 fol.LayerControl().add_to(contagem_base)
 
