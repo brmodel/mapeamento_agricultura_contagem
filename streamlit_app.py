@@ -59,6 +59,10 @@ leaf_icon = """<i class="fa-duotone fa-regular fa-leaf" style="--fa-primary-colo
 ## Criar Mapa ##
 contagem_base = fol.Map(location=[-19.88589, -44.07113], zoom_start=12.18, tiles="OpenStreetMap",
                          max_zoom=20, src = 4326)
+fol.Map.createPane('Unidade Produtiva Comunitária')
+fol.Map.createPane('Unidade Produtiva Institucional')
+fol.Map.createPane('Unidade Produtiva Institucional/Comunitária')
+fol.Map.createPane('Feira Comunitária')
 
 # Adicionar GeoJSON
 fol.GeoJson(
