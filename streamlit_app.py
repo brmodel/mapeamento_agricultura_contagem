@@ -59,19 +59,19 @@ leaf_icon = """<i class="fa-duotone fa-regular fa-leaf" style="--fa-primary-colo
 ## Criar Mapa ##
 contagem_base = fol.Map(location=[-19.88589, -44.07113], zoom_start=12.18, tiles="OpenStreetMap",
                          max_zoom=20, src = 4326)
-contagem_base.createPane('Unidade Produtiva Comunitária')
-contagem_base.createPane('Unidade Produtiva Institucional')
-contagem_base.createPane('Unidade Produtiva Institucional/Comunitária')
-contagem_base.createPane('Feira Comunitária')
+pane_community = folium.FeatureGroup(name="Unidade Produtiva Comunitária")
+pane_institution = folium.FeatureGroup(name="Unidade Produtiva Institucional")
+pane_institution_community = folium.FeatureGroup(name="Unidade Produtiva Institucional/Comunitária")
+pane_fair = folium.FeatureGroup(name="Feira Comunitária")
 
-# Adicionar GeoJSON
+# Adicionar o GeoJSON
 fol.GeoJson(
     regionais_json,
     style_function=colorir_regional,
     tooltip=fol.GeoJsonTooltip(fields=["Name"], aliases=["Regional:"])
 ).add_to(contagem_base)
 
-# Adicionar Pontos
+# Adicionar os pontos (Marcadores) com base no GeoDataFrame
 for _, row in gdf_ups.iterrows():
     coord = (row["lat"], row["lon"])
     numeral = row["Numeral"]
@@ -80,30 +80,38 @@ for _, row in gdf_ups.iterrows():
         2: "blue",
         3: "orange"
     }.get(numeral, "purple")
-    pane_name = {
-        1: "Unidade Produtiva Comunitária",
-        2: "Unidade Produtiva Institucional",
-        3: "Unidade Produtiva Institucional/Comunitária"
-    }.get(numeral, "Feira Comunitária")
+    
+    # Determinar o conteúdo do popup
     popup_html = f"""<h6><b>{row['Nome']}</b></h6><br>
-        <h7><b>Tipo:</b></h7> {row['Tipo']}<br>
-        <h7><b>Regional:</b></h7> {row['Regional']}"""
-    fol.Marker(
+                     <h7><b>Tipo:</b></h7> {row['Tipo']}<br>
+                     <h7><b>Regional:</b></h7> {row['Regional']}"""
+    
+    # Criar o marcador
+    marker = folium.Marker(
         location=coord,
         popup=fol.Popup(
-        html= popup_html,
-        parse_html=False,
-        lazy=True
+            html=popup_html,
+            parse_html=False,
+            lazy=True
         ),
         icon=fol.Icon(color=type_color),
-        tooltip=f"Conheça a Unidade Produtiva: {row['Nome']}",
-        pane=pane_name
-        ).add_to(contagem_base)
+        tooltip=f"Conheça a Unidade Produtiva: {row['Nome']}"
+    )
+    
+    # Adicionar o marcador ao grupo correto dependendo do 'Numeral'
+    if numeral == 1:
+        marker.add_to(pane_community)
+    elif numeral == 2:
+        marker.add_to(pane_institution)
+    elif numeral == 3:
+        marker.add_to(pane_institution_community)
+    else:
+        marker.add_to(pane_fair)
 
-
+# Adicionar o LayerControl para controle das camadas
 fol.LayerControl().add_to(contagem_base)
 
-## Exibir no Streamlit ##
+# Exibir no Streamlit
 st.title(APP_TITLE)
 st.header(APP_SUB_TITLE)
 st_map = st_folium(contagem_base, width=750, height=750)
