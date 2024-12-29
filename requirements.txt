@@ -7,4 +7,3 @@ pyogrio
 requests
 streamlit_folium
 branca
-html

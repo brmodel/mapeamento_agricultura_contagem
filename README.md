@@ -1,19 +1,9 @@
-# 🎈 Blank app template
+# mapeamento_contagem
+## Created by: Pedro de Freitas Pereira
 
-A simple Streamlit app template for you to modify!
+Mapeamento das Unidades Pro Contagem e Iniciativas da Prefeitura Municipal de Contagem.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
-### How to run it on your own machine
+## Credits
 
-1. Install the requirements
-
-   ```
-   $ pip install -r requirements.txt
-   ```
-
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+This package was created with Cookiecutter and the [andymcdgeo/cookiecutter_streamlit_app](https://github.com/andymcdgeo/cookiecutter-streamlit) project template.
