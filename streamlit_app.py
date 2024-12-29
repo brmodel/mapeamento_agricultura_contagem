@@ -103,8 +103,9 @@ for _, row in gdf_ups.iterrows():
         marker.add_to(up_inst)
     elif numeral == 3:
         marker.add_to(up_hibrida)
-    else:
+    elif numeral == 4:
         marker.add_to(feira_comu)
+    else: None
 
 # Adicionar o LayerControl para controle das camadas
 fol.LayerControl().add_to(contagem_base)
