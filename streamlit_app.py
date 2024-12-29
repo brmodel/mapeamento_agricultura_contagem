@@ -21,7 +21,6 @@ data_ups_sujo = conn.read(spreadsheet=url, usecols=list(range(6)), worksheet="18
 
 ## Remover pontos com coordenadas vazias ##
 data_ups = data_ups_sujo.dropna(subset=['Nome','lon','lat','Tipo','Regional','Numeral'])
-print(data_ups_sujo.columns)
 
 ## Carregar GeoJSON ##
 geojson_url = "https://raw.githubusercontent.com/brmodel/mapeamento_agricultura_contagem/main/data/regionais_contagem.geojson"
