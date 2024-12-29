@@ -53,20 +53,13 @@ def colorir_regional(feature):
         "dashArray": "5,5"
     }
 
-## Criar Mapa ##
+## Criar Mapa e os Layers como FeatureGroups ##
 contagem_base = fol.Map(location=[-19.88589, -44.07113], zoom_start=12.18, tiles="OpenStreetMap",
                          max_zoom=20, src = 4326)
 up_comu = fol.FeatureGroup(name="Unidade Produtiva Comunitária")
 up_inst = fol.FeatureGroup(name="Unidade Produtiva Institucional")
 up_hibrida = fol.FeatureGroup(name="Unidade Produtiva Institucional/Comunitária")
 feira_comu = fol.FeatureGroup(name="Feira Comunitária")
-
-# Adicionar o GeoJSON
-fol.GeoJson(
-    regionais_json,
-    style_function=colorir_regional,
-    tooltip=fol.GeoJsonTooltip(fields=["Name"], aliases=["Regional:"])
-).add_to(contagem_base)
 
 # Adicionar os pontos (Marcadores) com base no GeoDataFrame
 for _, row in gdf_ups.iterrows():
@@ -107,6 +100,11 @@ for _, row in gdf_ups.iterrows():
     else: None
 
 # Adicionar os grupos ao mapa e LayerControl para controle das camadas #
+fol.GeoJson(
+    regionais_json,
+    style_function=colorir_regional,
+    tooltip=fol.GeoJsonTooltip(fields=["Name"], aliases=["Regional:"])
+).add_to(contagem_base)
 up_comu.add_to(contagem_base)
 up_inst.add_to(contagem_base)
 up_hibrida.add_to(contagem_base)
