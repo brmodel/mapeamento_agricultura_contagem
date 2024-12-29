@@ -83,7 +83,7 @@ for _, row in gdf_ups.iterrows():
                      <h7><b>Tipo:</b></h7> {row['Tipo']}<br>
                      <h7><b>Regional:</b></h7> {row['Regional']}"""
     
-    # Criar o marcador
+    # Criar o marcador #
     marker = fol.Marker(
         location=coord,
         popup=fol.Popup(
@@ -95,7 +95,7 @@ for _, row in gdf_ups.iterrows():
         tooltip=f"Conheça a Unidade Produtiva: {row['Nome']}"
     )
     
-    # Adicionar o marcador ao grupo correto dependendo do 'Numeral'
+    # Adicionar o marcador ao grupo correto dependendo do 'Numeral' #
     if numeral == 1:
         marker.add_to(up_comu)
     elif numeral == 2:
@@ -106,7 +106,11 @@ for _, row in gdf_ups.iterrows():
         marker.add_to(feira_comu)
     else: None
 
-# Adicionar o LayerControl para controle das camadas
+# Adicionar os grupos ao mapa e LayerControl para controle das camadas #
+up_comu.add_to(contagem_base)
+up_inst.add_to(contagem_base)
+up_hibrida.add_to(contagem_base)
+feira_comu.add_to(contagem_base)
 fol.LayerControl().add_to(contagem_base)
 
 # Exibir no Streamlit
