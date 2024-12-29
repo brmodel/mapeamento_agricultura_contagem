@@ -99,11 +99,12 @@ for _, row in gdf_ups.iterrows():
         marker.add_to(feira_comu)
     else: None
 
-# Adicionar os grupos ao mapa e LayerControl para controle das camadas #
+## Adicionar os grupos ao mapa e LayerControl para controle das camadas #
 fol.GeoJson(
     regionais_json,
     style_function=colorir_regional,
-    tooltip=fol.GeoJsonTooltip(fields=["Name"], aliases=["Regional:"])
+    tooltip=fol.GeoJsonTooltip(fields=["Name"], aliases=["Regional:"]),
+    name="Regionais"
 ).add_to(contagem_base)
 up_comu.add_to(contagem_base)
 up_inst.add_to(contagem_base)
@@ -111,7 +112,7 @@ up_hibrida.add_to(contagem_base)
 feira_comu.add_to(contagem_base)
 fol.LayerControl().add_to(contagem_base)
 
-# Exibir no Streamlit
+## Exibir no Streamlit ##
 st.title(APP_TITLE)
 st.header(APP_SUB_TITLE)
 st_map = st_folium(contagem_base, width=750, height=750)
